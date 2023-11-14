@@ -24,13 +24,14 @@ export default function Item() {
       {/* Form Container */}
       <View className="flex-1 mt-52 mb-32 mx-5 justify-center">
 
-        <Text className="mb-5 text-lg ml-2 text-zinc-400">Informe seu endereço de entrega:</Text>
-
         <TextInput
         style={{backgroundColor: "#DFDFDF", textAlignVertical: 'top'}}
         className="rounded-lg h-20 p-3 mb-3"
         placeholder='Informe o seu pedido'
         />
+
+        <Text className="mb-5 text-lg ml-2 mt-5 text-zinc-400">Informe o seu endereço de entrega:</Text>
+
 
         <TextInput
         style={{backgroundColor: "#DFDFDF"}}
@@ -59,8 +60,8 @@ export default function Item() {
         />
 
         <View className="items-center justify-center mt-5">
-          <TouchableOpacity className="bg-green-500 p-3 w-32 items-center justify-center rounded-lg">
-            <Text className="text-white font-bold text-lg">Confirmar</Text>
+          <TouchableOpacity className="bg-green-500 p-5 w-52 items-center justify-center rounded-lg">
+            <Text className="text-white font-bold text-xl">Confirmar</Text>
           </TouchableOpacity>
         </View>
         
