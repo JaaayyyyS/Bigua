@@ -5,7 +5,7 @@ import PerfilLoja from '../components/perfil-loja'
 import Menu from '../../assets/Icons/menu.svg'
 import Bag from '../../assets/Icons/bag.svg'
 
-import Lojas from '../data/lojas_DB'
+import Lojas from '../../model/data/lojas_DB'
 
 const Lista_Lojas = Lojas.returnAll_loja()
 
@@ -39,11 +39,15 @@ export default function Restaurantes({ navigation }) {
             Lista_Lojas.map((l, i) => {
               return(
                 <PerfilLoja
+                key={i}
                 nome={l._nome}
                 imagem={l._foto_path}
                 descricao={l._descricao}
                 aberto={true}
-                event={() => {navigation.navigate('cardapio', {cardapio: l._cardapio})}}
+                event={() => {navigation.navigate('cardapio', {
+                  cardapio: l._cardapio,
+                  nomeLoja: l._nome
+                })}}
                 />
               )
             })

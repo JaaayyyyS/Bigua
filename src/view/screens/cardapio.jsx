@@ -10,8 +10,9 @@ import FiltroCardapio from '../components/filtro-cardapio'
 
 const filtros = ['Pizzas', 'Doces', 'Empanadas', 'Bebidas', 'Pães', 'vinhos']
 
-export default function Cardapio({ navigation }) {
+export default function Cardapio({ route, navigation }) {
   const insets = useSafeAreaInsets()
+  const { cardapio, nomeLoja } = route.params
 
   return (
     <View className="flex-1" 
@@ -34,7 +35,7 @@ export default function Cardapio({ navigation }) {
           >
             <BackArrow/>
           </TouchableOpacity>
-          <Text className="font-bold text-lg">Piazza Pizzeria</Text>
+          <Text className="font-bold text-lg">{nomeLoja}</Text>
           <Bag/>
         </View>
 
@@ -56,16 +57,20 @@ export default function Cardapio({ navigation }) {
 
         {/* Cardápio */}
         <ScrollView className="mx-2 mt-3 flex-1">
-          <Text className="text-2xl font-bold ml-3 mt-3 mb-3 text-neutral-400">Popular</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <Text className="text-2xl font-bold ml-3 mt-3 mb-3 text-neutral-400">Tudo</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
-          <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
+          {
+            cardapio.map((p, i) => {
+              return(
+                <PerfilLoja
+                key={i}
+                nome={p._nome}
+                descricao={p._descricao}
+                imagem={p._foto_path}
+                aberto={true}
+                />
+              )
+            })
+          }
+          
         </ScrollView>
 
       </View>
