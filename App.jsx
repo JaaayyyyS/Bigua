@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ListaRestaurantes from './src/screens/lista-restaurantes';
 import Cardapio from './src/screens/cardapio';
 import Item from './src/screens/item';
+import Login from './src/screens/login';
 
 const Stack = createNativeStackNavigator()
 
