@@ -56,9 +56,11 @@ export default function Cardapio({ navigation }) {
 
         {/* Cardápio */}
         <ScrollView className="mx-2 mt-3 flex-1">
+          <Text className="text-2xl font-bold ml-3 mt-3 mb-3 text-neutral-400">Popular</Text>
           <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
           <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
           <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
+          <Text className="text-2xl font-bold ml-3 mt-3 mb-3 text-neutral-400">Tudo</Text>
           <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
           <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>
           <TouchableOpacity onPress={() => navigation.navigate("item")} className="bg-white h-32 rounded-lg mb-3"/>

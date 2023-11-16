@@ -5,8 +5,14 @@ import PerfilLoja from '../components/perfil-loja'
 import Menu from '../../assets/Icons/menu.svg'
 import Bag from '../../assets/Icons/bag.svg'
 
+import Lojas from '../data/lojas_DB'
+
+const Lista_Lojas = Lojas.returnAll_loja()
+
 export default function Restaurantes({ navigation }) {
   const insets = useSafeAreaInsets()
+
+  console.log(Lista_Lojas)
 
   return (
     <View className="flex-1" 
@@ -28,29 +34,21 @@ export default function Restaurantes({ navigation }) {
 
         {/* Lista de Lojas */}
         <View className="flex-1 justify-center items-center">
-          <PerfilLoja
-          nome={'Piazza Pizzeria'}
-          imagem={require('../../assets/Images/PiazzaPizzeriaFoto.png')}
-          descricao={"Descrição longa do estabelecimento"}
-          aberto={true}
-          event={() => {navigation.navigate('cardapio')}}
-          />
 
-          <PerfilLoja
-          nome={'Café Tupy'}
-          imagem={require('../../assets/Images/PiazzaPizzeriaFoto.png')}
-          descricao={"Descrição longa do estabelecimento"}
-          aberto={false}
-          event={() => {navigation.navigate('cardapio')}}
-          />
+          {
+            Lista_Lojas.map((l, i) => {
+              return(
+                <PerfilLoja
+                nome={l._nome}
+                imagem={l._foto_path}
+                descricao={l._descricao}
+                aberto={true}
+                event={() => {navigation.navigate('cardapio', {cardapio: l._cardapio})}}
+                />
+              )
+            })
+          }
 
-          <PerfilLoja
-          nome={'Convés'}
-          imagem={require('../../assets/Images/PiazzaPizzeriaFoto.png')}
-          descricao={"Descrição longa do estabelecimento"}
-          aberto={false}
-          event={() => {navigation.navigate('cardapio')}}
-          />
         </View>
 
       </View>
