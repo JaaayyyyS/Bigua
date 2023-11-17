@@ -6,6 +6,7 @@ import BackArrow from '../../../assets/Icons/back-arrow.svg'
 import Bag from '../../../assets/Icons/bag.svg'
 
 import FiltroCardapio from '../components/filtro-cardapio'
+import Produto from '../components/produto'
 
 
 const filtros = ['Pizzas', 'Doces', 'Empanadas', 'Bebidas', 'Pães', 'vinhos']
@@ -60,7 +61,7 @@ export default function Cardapio({ route, navigation }) {
           {
             cardapio.map((p, i) => {
               return(
-                <PerfilLoja
+                <Produto
                 key={i}
                 nome={p._nome}
                 descricao={p._descricao}
@@ -72,6 +73,7 @@ export default function Cardapio({ route, navigation }) {
                   variantes: p._variantes,
                   adicionais: p._adicionais
                 })}
+                variantes={p._variantes}
                 />
               )
             })

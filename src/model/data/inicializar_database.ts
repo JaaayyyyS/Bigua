@@ -5,11 +5,11 @@ import Lojas from "./lojas_DB";
 export default function inicializar_database() {
   const cardapio_piazza_pizzeria: Array<Produto> = [
     new Produto(
-      'Calabrese',
+      'Calabrese com variante (Debug)',
       'Pizza de calabresa, queijo, azeitona e pestro',
       require("../../../assets/Images/pizza.jpg"),
-      [],
-      [],
+      ["4 fatias", "6 fatias"],
+      ["Mussarela", "Gorgo", "Peperoni", "Calabresa"],
     ),
     new Produto(
       'Calabrese',
