@@ -2,8 +2,8 @@ import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import PerfilLoja from '../components/perfil-loja'
 
-import BackArrow from '../../assets/Icons/back-arrow.svg'
-import Bag from '../../assets/Icons/bag.svg'
+import BackArrow from '../../../assets/Icons/back-arrow.svg'
+import Bag from '../../../assets/Icons/bag.svg'
 
 import FiltroCardapio from '../components/filtro-cardapio'
 

@@ -5,6 +5,7 @@ export default class Loja{
   _descricao: string;
   _foto_path: NodeRequire;
   _loja_Aberta: boolean;
+  
   _cardapio: Array<Produto> = [];
 
   constructor(nome: string, descricao: string, foto_path: NodeRequire) {
