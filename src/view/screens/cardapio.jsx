@@ -65,7 +65,13 @@ export default function Cardapio({ route, navigation }) {
                 nome={p._nome}
                 descricao={p._descricao}
                 imagem={p._foto_path}
-                aberto={true}
+                event={() => navigation.navigate("item",{
+                  nome: p._nome,
+                  descricao: p._descricao,
+                  foto: p._foto_path,
+                  variantes: p._variantes,
+                  adicionais: p._adicionais
+                })}
                 />
               )
             })
