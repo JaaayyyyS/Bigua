@@ -12,8 +12,6 @@ const Lista_Lojas = Lojas.returnAll_loja()
 export default function Restaurantes({ navigation }) {
   const insets = useSafeAreaInsets()
 
-  console.log(Lista_Lojas)
-
   return (
     <View className="flex-1" 
     style={{
