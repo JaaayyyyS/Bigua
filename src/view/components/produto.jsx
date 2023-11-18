@@ -17,7 +17,7 @@ export default function Produto({ nome, imagem, descricao, event, variantes }) {
             {
               variantes.length < 1?
               <Text></Text>:
-              <Text className="font-bold text-neutral-400 text-base">{variantes.length} variantes</Text>
+              <Text className="font-bold text-neutral-400 text-base">{variantes.length} opções</Text>
             }
             <Text className="font-bold text-neutral-800 text-base">R$42,00</Text>
           </View>

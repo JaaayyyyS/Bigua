@@ -3,14 +3,14 @@ import { useState } from "react"
 import React from 'react'
 import SelectButton from './select-button'
 
-export default function SingleSelectSection({ selections }) {
+export default function MultiSelectSection({ selections }) {
   const [ selectedButtons, setSelectedButtons ] = useState([])
 
   const handleSingleSelection = (selected) => {
     if (selectedButtons.includes(selected)) {
-      setSelectedButtons([])
+      setSelectedButtons(selectedButtons.filter(s => s !== selected))
     } else {
-      setSelectedButtons([selected])
+      setSelectedButtons([...selectedButtons, selected])
     }
   }
 

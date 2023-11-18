@@ -4,6 +4,7 @@ import PerfilLoja from '../components/perfil-loja'
 
 import Menu from '../../../assets/Icons/menu.svg'
 import Bag from '../../../assets/Icons/bag.svg'
+import Slogan from '../../../assets/Bigua express.svg'
 
 import Lojas from '../../model/data/lojas_DB'
 
@@ -28,6 +29,12 @@ export default function Restaurantes({ navigation }) {
         <View className="flex-row justify-between">
           <Menu/>
           <Bag/>
+        </View>
+
+        {/* Slogan */}
+        <View className="mt-10">
+          <Slogan/>
+          <Text className="text-xl ml-1 mt-1 text-neutral-500">Faça seu pedido aqui!</Text>
         </View>
 
         {/* Lista de Lojas */}
