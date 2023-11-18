@@ -20,14 +20,14 @@ export default function SingleSelectSection({ selections }) {
         selections.map((s, i) => {
           return(
             selectedButtons.includes(s)?
-            <View className="mb-2">
+            <View className="mb-2" key={i}>
               <SelectButton
               text={s}
               isSlected={true}
               event={() => handleSingleSelection(s)}
               />
             </View>:
-            <View className="mb-2">
+            <View className="mb-2" key={i}>
               <SelectButton
               text={s}
               isSlected={false}

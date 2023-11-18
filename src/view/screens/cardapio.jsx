@@ -27,6 +27,7 @@ export default function Cardapio({ route, navigation }) {
 
       {/* Header Background */}
       <View className="absolute top-0 bg-white w-full h-28 rounded-b-3xl"/>
+      
       <View className="flex-1">
 
         {/* HEADER */}
