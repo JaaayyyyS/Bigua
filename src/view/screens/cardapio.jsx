@@ -9,7 +9,7 @@ import FiltroCardapio from '../components/filtro-cardapio'
 import Produto from '../components/produto'
 
 
-const filtros = ['Pizzas', 'Doces', 'Empanadas', 'Bebidas', 'Pães', 'vinhos']
+const filtros = ['Pizzas', 'Doces', 'Empanadas', 'Bebidas', 'Pães', 'Vinhos', 'Entradas', '...']
 
 export default function Cardapio({ route, navigation }) {
   const insets = useSafeAreaInsets()
@@ -42,11 +42,9 @@ export default function Cardapio({ route, navigation }) {
         </View>
 
         {/* Top Filters */}
-        <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        bounces={false}
-        className="mt-5 max-h-10 mx-2"
+        <View
+        
+        className="mt-5 mx-1 rounded-lg flex-row flex-wrap items-center"
         >
           {
             filtros.map((f, i) => {
@@ -55,10 +53,10 @@ export default function Cardapio({ route, navigation }) {
               )
             })
           }
-        </ScrollView>
+        </View>
 
         {/* Cardápio */}
-        <ScrollView className="mx-2 mt-3 flex-1">
+        <ScrollView className="mx-1 mt-3 flex-1">
           {
             cardapio.map((p, i) => {
               return(

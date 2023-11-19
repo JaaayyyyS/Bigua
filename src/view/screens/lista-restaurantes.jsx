@@ -32,7 +32,7 @@ export default function Restaurantes({ navigation }) {
         </View>
 
         {/* Slogan */}
-        <View className="mt-10">
+        <View className="mt-12">
           <Slogan/>
           <Text className="text-xl ml-1 mt-1 text-neutral-500">Faça seu pedido aqui!</Text>
         </View>

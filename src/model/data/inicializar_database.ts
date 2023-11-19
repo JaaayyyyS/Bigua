@@ -8,8 +8,16 @@ export default function inicializar_database() {
       'Calabrese com variante (Debug)',
       'Pizza de calabresa, queijo, azeitona e pestro',
       require("../../../assets/Images/pizza.jpg"),
-      ["4 fatias", "6 fatias"],
-      ["Mussarela", "Gorgo", "Peperoni", "Calabresa"],
+      [
+        {nome: "4 fatias", valor: 32.00},
+        {nome: "6 fatias", valor: 52.00}
+      ],
+      [
+        {nome: "Mussarela", valor: 8.00},
+        {nome: "Calabresa", valor: 8.00},
+        {nome: "Gorgo", valor: 8.00},
+        {nome: "Peperoni", valor: 8.00}
+      ],
     ),
     new Produto(
       'Calabrese',

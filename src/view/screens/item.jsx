@@ -1,11 +1,13 @@
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useState } from 'react'
 
 import BackArrow from '../../../assets/Icons/back-arrow.svg'
 import SingleSelectSection from '../components/singleselect-section'
 import MultiSelectSection from '../components/multiselect-section'
+import Pedido from '../../model/data/pedido'
+import ItemPedido from '../../model/classes/item_pedido'
 
 export default function Item({ route, navigation }) {
   const insets = useSafeAreaInsets()
@@ -13,6 +15,19 @@ export default function Item({ route, navigation }) {
   const { nome, descricao, foto, variantes, adicionais } = route.params
 
   const [quantidade, setQuantidade] = useState(1)
+  const [selecionadosVariantes, setSelecionadosVariantes] = useState([])
+  const [selecionadosAdicionais, setSelecionadosAdicionais] = useState([])
+  const [valorTotal, setValorTotal] = useState(0.00)
+
+  const handleAddPedido = () => {
+    Pedido.add_item(new ItemPedido(
+      nomeProduto = nome,
+      selecionadosVariantes[0],
+      selecionadosAdicionais,
+      quantidade,
+      'Teste de pedido longa descrição testando espaçamento no carrinho'
+    ))
+  }
 
   const handleQuantidadeItem = (operacao) => {
     if(quantidade === 1) {
@@ -21,6 +36,23 @@ export default function Item({ route, navigation }) {
       operacao === 'somar'? setQuantidade(quantidade + 1) : setQuantidade(quantidade - 1)
     }
   }
+
+  const handleChildToParent = (childData, tipo) => {
+    tipo === 'variantes'? setSelecionadosVariantes(childData) : setSelecionadosAdicionais(childData)
+  }
+
+  useEffect(() => {
+    let soma = 0
+    selecionadosVariantes.forEach(v => {
+      soma += v.valor
+    })
+    selecionadosAdicionais.forEach(a => {
+      soma += a.valor
+    })
+    
+    setValorTotal(soma * quantidade)
+    console.log(selecionadosVariantes, selecionadosAdicionais)
+  }, [selecionadosVariantes, selecionadosAdicionais, quantidade])
 
   return (
     <View className="flex-1" 
@@ -68,11 +100,19 @@ export default function Item({ route, navigation }) {
             >
               <View>
                 <Text className="text-lg font-semibold text-neutral-400 mb-2">Opções</Text>
-                <SingleSelectSection selections={variantes}/>
+                {
+                  variantes.length > 0?
+                  <SingleSelectSection selections={variantes} childToParent={handleChildToParent}/>:
+                  <Text className="text-neutral-400 text-base ml-1">Nenhuma opção</Text>
+                }
               </View>
               <View>
                 <Text className="text-lg font-semibold text-neutral-400 mb-2">Adicionais</Text>
-                <MultiSelectSection selections={adicionais}/>
+                {
+                  adicionais.length > 0?
+                  <MultiSelectSection selections={adicionais} childToParent={handleChildToParent}/>:
+                  <Text className="text-neutral-400 text-base ml-1">Nenhum adicional</Text>
+                }
               </View>
               <View>
                 <Text className="text-lg font-semibold text-neutral-400 mb-2">Observações</Text>
@@ -114,9 +154,12 @@ export default function Item({ route, navigation }) {
 
             {/* Botão de finalizar a compra */}
             <TouchableOpacity className="flex-2 justify-center bg-green-500 rounded-lg p-3 px-5"
-            onPress={() => navigation.navigate('carrinho')}
+            onPress={() => {
+              handleAddPedido()
+              navigation.navigate('carrinho')
+            }}
             >
-              <Text className="text-lg font-semibold text-neutral-100">Adicionar R$60,00</Text>
+              <Text className="text-lg font-semibold text-neutral-100">Adicionar R${valorTotal.toFixed(2)}</Text>
             </TouchableOpacity>
 
           </View>

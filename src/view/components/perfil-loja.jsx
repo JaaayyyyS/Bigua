@@ -7,7 +7,7 @@ export default function PerfilLoja({ nome, imagem, descricao, event }) {
     className="flex-row p-5 rounded-lg mb-3">
       
         <Image source={imagem} className="h-32 w-32 rounded-lg flex-2"/>
-        <View className="ml-3 flex-1">
+        <View className="flex-1 pl-3">
           <Text className="font-bold text-lg mb-1"
           >{nome}</Text>
           <Text className="text-sm flex-wrap">{descricao}</Text>
