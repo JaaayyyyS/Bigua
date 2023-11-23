@@ -10,27 +10,13 @@ export default class ItemPedido {
 
   _observacao: string
 
-  constructor(nomeProduto: string, variante: Ivariante, adicionais: Array<Iadicional>, quantidade: number, observacao: string) {
+  constructor(nomeProduto: string, variante: Ivariante, adicionais: Array<Iadicional>, quantidade: number, valorTotal: Float, observacao: string) {
     this._nome_produto = nomeProduto
     this._variante = variante
     this._adicionais = adicionais
     this._quantidade = quantidade
-    this._valor_total = this.calcular_valor_total()
+    this._valor_total = valorTotal
 
     this._observacao = observacao
-  }
-
-  calcular_valor_total(): Float {
-    let soma: Float = 0.00
-
-    soma += this._variante.valor
-
-    this._adicionais.forEach(a => {
-      soma += a.valor
-    })
-
-    soma * this._quantidade
-
-    return soma
   }
 }

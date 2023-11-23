@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import PerfilLoja from '../components/perfil-loja'
 
@@ -28,7 +28,9 @@ export default function Restaurantes({ navigation }) {
         {/* HEADER */}
         <View className="flex-row justify-between">
           <Menu/>
-          <Bag/>
+          <TouchableOpacity onPress={() => navigation.navigate('carrinho')}>
+            <Bag/>
+          </TouchableOpacity>
         </View>
 
         {/* Slogan */}

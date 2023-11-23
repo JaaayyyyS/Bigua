@@ -25,6 +25,7 @@ export default function Item({ route, navigation }) {
       selecionadosVariantes[0],
       selecionadosAdicionais,
       quantidade,
+      valorTotal,
       'Teste de pedido longa descrição testando espaçamento no carrinho'
     ))
   }

@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -8,6 +8,12 @@ import Pedido from '../../model/data/pedido'
 
 export default function Carrinho({ navigation }) {
   const insets = useSafeAreaInsets()
+
+  const [valorTotal, setValorTotal] = useState(0)
+
+  useEffect(() => {
+    setValorTotal(Pedido.return_valor_total)
+  })
 
   return (
     <View className="flex-1" 
@@ -36,7 +42,7 @@ export default function Carrinho({ navigation }) {
         </View>
 
         {/* Lista de pedidos */}
-        <ScrollView className="flex-1 mt-8 mx-3 rounded-lg">
+        <ScrollView className="flex-1 mt-8 mx-3 border-r-2 max-h-fit border-neutral-500 pr-2">
           {
             Pedido.return_all_itens().map((item, i) => {
               return (
@@ -71,6 +77,31 @@ export default function Carrinho({ navigation }) {
             })
           }
         </ScrollView>
+
+        {/* Valor Total e Botão de finalizar compra */}
+        <View className="flex-2 justify-between">
+
+          {/* Valor Total */}
+          <View className="bg-white ml-4 w-8/12 mr-32 mt-4 rounded-lg p-3 mb-5">
+            <Text className="text-base text-neutral-400">Taxa de entrega: R${(valorTotal * 0.04).toFixed(2)}</Text>
+            <Text className="text-lg font-semibold text-neutral-800">Total: R${(valorTotal + (valorTotal * 0.04)).toFixed(2)}</Text>
+          </View>
+
+          {/* Botão Confirmar Pedido */}
+          <View className="justify-between items-center gap-y-2 mb-3">
+            <TouchableOpacity className="border-2 border-neutral-400 p-3 rounded-lg items-center w-11/12"
+            onPress={() => navigation.goBack()}
+            >
+              <Text className="font-semibold text-base text-neutral-500">Continuar Comprando</Text>
+            </TouchableOpacity>
+            <TouchableOpacity className="bg-green-500 p-5 rounded-lg items-center w-11/12"
+            onPress={() => navigation.navigate('confirmar-entrega', {valorTotal: valorTotal})}
+            >
+              <Text className="font-semibold text-lg text-white">Confirmar Pedido</Text>
+            </TouchableOpacity>
+          </View>
+
+        </View>
 
       </View>
 

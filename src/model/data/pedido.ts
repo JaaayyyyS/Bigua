@@ -15,7 +15,17 @@ export default class Pedido {
     Pedido._itens.splice(0, Pedido._itens.length)
   }
 
-  static return_all_itens() {
+  static return_valor_total(): number {
+    let soma: number = 0
+
+    Pedido._itens.forEach(i => {
+      soma += i._valor_total
+    })
+
+    return soma
+  }
+
+  static return_all_itens(): Array<ItemPedido> {
     console.log(Pedido._itens)
     return Pedido._itens
   }

@@ -12,6 +12,7 @@ import Cardapio from './src/view/screens/cardapio';
 import inicializar_database from './src/model/data/inicializar_database';
 import Item from './src/view/screens/item';
 import Carrinho from './src/view/screens/carrinho';
+import ConfirmarEntrega from './src/view/screens/confirmar-entrega';
 
 const Stack = createNativeStackNavigator()
 
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name='cardapio' component={Cardapio} options={{headerShown: false}}/>
         <Stack.Screen name='item' component={Item} options={{headerShown: false, animation: "slide_from_bottom"}}/>
         <Stack.Screen name='carrinho' component={Carrinho} options={{headerShown: false, animation: "slide_from_right"}}/>
+        <Stack.Screen name='confirmar-entrega' component={ConfirmarEntrega} options={{headerShown: false, animation: "slide_from_right"}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

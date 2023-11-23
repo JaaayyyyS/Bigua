@@ -38,7 +38,9 @@ export default function Cardapio({ route, navigation }) {
             <BackArrow/>
           </TouchableOpacity>
           <Text className="font-bold text-lg">{nomeLoja}</Text>
-          <Bag/>
+          <TouchableOpacity onPress={() => navigation.navigate('carrinho')}>
+            <Bag/>
+          </TouchableOpacity>
         </View>
 
         {/* Top Filters */}
