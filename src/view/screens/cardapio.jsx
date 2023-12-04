@@ -1,19 +1,32 @@
 import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
+import { useState } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import PerfilLoja from '../components/perfil-loja'
+import DropDownPicker from 'react-native-dropdown-picker'
 
 import BackArrow from '../../../assets/Icons/back-arrow.svg'
 import Bag from '../../../assets/Icons/bag.svg'
 
-import FiltroCardapio from '../components/filtro-cardapio'
 import Produto from '../components/produto'
 
 
-const filtros = ['Pizzas', 'Doces', 'Empanadas', 'Bebidas', 'Pães', 'Vinhos', 'Entradas', '...']
+const filtros = [
+  {label: 'Pizzas', value: 'pizzas'},
+  {label: 'Doces', value: 'doces'},
+  {label: 'Empanadas', value: 'empanadas'},
+  {label: 'Pães', value: 'paes'},
+  {label: 'Bebidas', value: 'bebidas'},
+  {label: 'Vinhos', value: 'vinhos'},
+]
 
 export default function Cardapio({ route, navigation }) {
   const insets = useSafeAreaInsets()
-  const { cardapio, nomeLoja } = route.params
+  const { cardapio, nomeLoja, filtro } = route.params
+
+  if (filtro) {
+    cardapioFiltrado = cardapio.filter(p => p._filtro === filtro)
+  } else {
+    cardapioFiltrado = cardapio
+  }
 
   return (
     <View className="flex-1" 
@@ -26,7 +39,7 @@ export default function Cardapio({ route, navigation }) {
     }}>
 
       {/* Header Background */}
-      <View className="absolute top-0 bg-white w-full h-28 rounded-b-3xl"/>
+      <View className="absolute top-0 bg-white w-full h-28"/>
       
       <View className="flex-1">
 
@@ -37,49 +50,35 @@ export default function Cardapio({ route, navigation }) {
           >
             <BackArrow/>
           </TouchableOpacity>
-          <Text className="font-bold text-lg">{nomeLoja}</Text>
+          <Text className="font-bold text-lg">{filtro? filtro : nomeLoja}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('carrinho')}>
             <Bag/>
           </TouchableOpacity>
         </View>
 
-        {/* Top Filters */}
-        <View
-        
-        className="mt-5 mx-1 rounded-lg flex-row flex-wrap items-center"
-        >
-          {
-            filtros.map((f, i) => {
-              return (
-                <FiltroCardapio key={i} nome={f}/>
-              )
-            })
-          }
-        </View>
-
         {/* Cardápio */}
-        <ScrollView className="mx-1 mt-3 flex-1">
+        <ScrollView className="mx-1 mt-6 flex-1">
           {
-            cardapio.map((p, i) => {
+            cardapioFiltrado.map((p, i) => {
               return(
                 <Produto
                 key={i}
                 nome={p._nome}
                 descricao={p._descricao}
                 imagem={p._foto_path}
-                event={() => navigation.navigate("item",{
+                event={() => navigation.navigate("item", {
                   nome: p._nome,
                   descricao: p._descricao,
                   foto: p._foto_path,
                   variantes: p._variantes,
-                  adicionais: p._adicionais
+                  adicionais: p._adicionais,
+                  fornecedorLoja: nomeLoja
                 })}
                 variantes={p._variantes}
                 />
               )
             })
           }
-          
         </ScrollView>
 
       </View>

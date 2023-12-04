@@ -3,189 +3,78 @@ import Produto from "../classes/produto";
 import Lojas from "./lojas_DB";
 
 export default function inicializar_database() {
-  const cardapio_piazza_pizzeria: Array<Produto> = [
-    new Produto(
-      'Calabrese com variante (Debug)',
-      'Pizza de calabresa, queijo, azeitona e pestro',
-      require("../../../assets/Images/pizza.jpg"),
-      [
-        {nome: "4 fatias", valor: 32.00},
-        {nome: "6 fatias", valor: 52.00}
-      ],
-      [
-        {nome: "Mussarela", valor: 8.00},
-        {nome: "Calabresa", valor: 8.00},
-        {nome: "Gorgo", valor: 8.00},
-        {nome: "Peperoni", valor: 8.00}
-      ],
-    ),
-    new Produto(
-      'Calabrese',
-      'Pizza de calabresa, queijo, azeitona e pestro',
-      require("../../../assets/Images/pizza.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Calabrese',
-      'Pizza de calabresa, queijo, azeitona e pestro',
-      require("../../../assets/Images/pizza.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Calabrese',
-      'Pizza de calabresa, queijo, azeitona e pestro',
-      require("../../../assets/Images/pizza.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Calabrese',
-      'Pizza de calabresa, queijo, azeitona e pestro',
-      require("../../../assets/Images/pizza.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Calabrese',
-      'Pizza de calabresa, queijo, azeitona e pestro',
-      require("../../../assets/Images/pizza.jpg"),
-      [],
-      [],
-    ),
-  ]
-
-  const cardapio_cafe_tupy: Array<Produto> = [
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Café',
-      'Cafézin gostoso expresso leite de boi',
-      require("../../../assets/Images/cafe.jpg"),
-      [],
-      [],
-    ),
-  ]
-
-  const cardapio_conves: Array<Produto> = [
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-    new Produto(
-      'Frutos do mar',
-      'Lula molusco, bob esponja, patrick estrela e o seu sirigueijo',
-      require("../../../assets/Images/prato.jpg"),
-      [],
-      [],
-    ),
-  ]
-
 
   Lojas.add_loja(new Loja(
     'Piazza Pizzeria', 
     'Descrição longa do estabelecimento',
-    require('../../../assets/Images/PiazzaPizzeriaFoto.png')
+    require('../../../assets/Images/pizza.jpg'),
+    [
+      new Produto(
+        'Pão Italianinho',
+        'Descrição informativa do produto',
+        require("../../../assets/Images/pizza.jpg"),
+        [
+          {nome: "Italianinho", valor: 15.00},
+        ],
+        [],
+        'Pães'
+      ),
+      new Produto(
+        'Pão Sourdough',
+        'Descrição informativa do produto',
+        require("../../../assets/Images/pizza.jpg"),
+        [
+          {nome: "Sourdough", valor: 20.00},
+        ],
+        [],
+        'Pães'
+      ),
+      new Produto(
+        'Calabrese',
+        'Descrição informativa do produto',
+        require("../../../assets/Images/pizza.jpg"),
+        [
+          {nome: "4 Fatias", valor: 32.00},
+          {nome: "6 Fatias", valor: 52.00},
+        ],
+        [
+          {nome: "Mussarela", valor: 8.00},
+          {nome: "Calabresa", valor: 8.00},
+          {nome: "Peperoni", valor: 10.00},
+          {nome: "Gorgonzola", valor: 8.00},
+        ],
+        'Pizzas'
+      ),
+    ]
   ))
 
   Lojas.add_loja(new Loja(
     'Café Tupy', 
     'Descrição longa do estabelecimento',
-    require('../../../assets/Images/PiazzaPizzeriaFoto.png')
+    require('../../../assets/Images/cafe.jpg'),
+    [
+      new Produto(
+        'Café',
+        'Descrição informativa do produto',
+        require("../../../assets/Images/pizza.jpg"),
+        [
+          {nome: "Café", valor: 8.00},
+        ],
+        [],
+        
+      ),
+    ]
   ))
 
   Lojas.add_loja(new Loja(
     'Convés', 
     'Descrição longa do estabelecimento',
-    require('../../../assets/Images/PiazzaPizzeriaFoto.png')
+    require('../../../assets/Images/prato.jpg')
   ))
 
-  cardapio_piazza_pizzeria.forEach(p => {
-    Lojas.return_loja("Piazza Pizzeria").add_produto(p)
-  })
-  cardapio_cafe_tupy.forEach(p => {
-    Lojas.return_loja("Café Tupy").add_produto(p)
-  })
-  cardapio_conves.forEach(p => {
-    Lojas.return_loja("Convés").add_produto(p)
-  })
+  Lojas.add_loja(new Loja(
+    'Hamburgueria', 
+    'Descrição longa do estabelecimento',
+    require('../../../assets/Images/pizza.jpg')
+  ))
 }

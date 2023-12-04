@@ -13,6 +13,8 @@ import inicializar_database from './src/model/data/inicializar_database';
 import Item from './src/view/screens/item';
 import Carrinho from './src/view/screens/carrinho';
 import ConfirmarEntrega from './src/view/screens/confirmar-entrega';
+import Login from './src/view/screens/login';
+import Filtros from './src/view/screens/filtros';
 
 const Stack = createNativeStackNavigator()
 
@@ -25,7 +27,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name='login' component={Login} options={{headerShown: false}}/>
         <Stack.Screen name='lista-restaurantes' component={ListaRestaurantes} options={{headerShown: false}}/>
+        <Stack.Screen name='filtros' component={Filtros} options={{headerShown: false}}/>
         <Stack.Screen name='cardapio' component={Cardapio} options={{headerShown: false}}/>
         <Stack.Screen name='item' component={Item} options={{headerShown: false, animation: "slide_from_bottom"}}/>
         <Stack.Screen name='carrinho' component={Carrinho} options={{headerShown: false, animation: "slide_from_right"}}/>

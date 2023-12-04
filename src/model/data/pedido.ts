@@ -2,13 +2,17 @@ import ItemPedido from "../classes/item_pedido";
 
 export default class Pedido {
   static _itens: Array<ItemPedido> = []
+  static _fornecedorLoja: string
 
   static add_item(itemToAdd: ItemPedido) {
     Pedido._itens.push(itemToAdd)
   }
 
   static remove_item(itemToRemove: ItemPedido) {
-    Pedido._itens.filter(i => i !== itemToRemove)
+    if (Pedido._itens.includes(itemToRemove)) {
+      console.log(`Removendo item ${this.return_item(itemToRemove)[0]._nome_produto} do pedido`)
+      Pedido._itens = Pedido._itens.filter(i => i._id !== itemToRemove._id)
+    }
   }
 
   static clear_itens() {
@@ -26,8 +30,11 @@ export default class Pedido {
   }
 
   static return_all_itens(): Array<ItemPedido> {
-    console.log(Pedido._itens)
     return Pedido._itens
+  }
+
+  static return_item(itemToRemove: ItemPedido) {
+    return Pedido._itens.filter(i => i._id === itemToRemove._id)
   }
 
   static DEBUG_show_itens() {

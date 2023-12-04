@@ -10,10 +10,17 @@ export default function Carrinho({ navigation }) {
   const insets = useSafeAreaInsets()
 
   const [valorTotal, setValorTotal] = useState(0)
+  const [pedidoCarrinho, setPedidoCarrinho] = useState(Pedido.return_all_itens())
 
   useEffect(() => {
     setValorTotal(Pedido.return_valor_total)
-  })
+  },)
+
+  const removeItem = (itemToRemove) => {
+    Pedido.remove_item(itemToRemove)
+    setPedidoCarrinho(Pedido.return_all_itens())
+    console.log(Pedido._itens)
+  }
 
   return (
     <View className="flex-1" 
@@ -44,7 +51,7 @@ export default function Carrinho({ navigation }) {
         {/* Lista de pedidos */}
         <ScrollView className="flex-1 mt-8 mx-3 border-r-2 max-h-fit border-neutral-500 pr-2">
           {
-            Pedido.return_all_itens().map((item, i) => {
+            pedidoCarrinho.map((item, i) => {
               return (
                 <View key={i}
                 className="bg-white h-fit p-3 rounded-lg mb-2">
@@ -66,8 +73,13 @@ export default function Carrinho({ navigation }) {
                         }</Text>
                       </View>
                       <Text className="text-neutral-500 mb-1">Observação: {item._observacao}</Text>
-                      <View className="items-end">
-                        <Text className="text-neutral-800 text-base font-semibold">R${item._valor_total.toFixed(2)}</Text>
+                      <View className="flex-row justify-between items-center">
+                        <Text className="text-neutral-800 text-lg font-semibold">R${item._valor_total.toFixed(2)}</Text>
+                        <TouchableOpacity className="p-1 border-2 border-red-500 rounded-lg justify-center items-center mt-2"
+                        onPress={() => {removeItem(item)}}
+                        >
+                          <Text className="text-red-500 text-base font-semibold">Remover Item</Text>
+                        </TouchableOpacity>
                       </View>
                     </View>
                   </View>
@@ -89,10 +101,10 @@ export default function Carrinho({ navigation }) {
 
           {/* Botão Confirmar Pedido */}
           <View className="justify-between items-center gap-y-2 mb-3">
-            <TouchableOpacity className="border-2 border-neutral-400 p-3 rounded-lg items-center w-11/12"
+            <TouchableOpacity className="border-2 border-neutral-800 p-3 rounded-lg items-center w-11/12"
             onPress={() => navigation.goBack()}
             >
-              <Text className="font-semibold text-base text-neutral-500">Continuar Comprando</Text>
+              <Text className="font-semibold text-base text-neutral-800">Continuar Comprando</Text>
             </TouchableOpacity>
             <TouchableOpacity className="bg-green-500 p-5 rounded-lg items-center w-11/12"
             onPress={() => navigation.navigate('confirmar-entrega', {valorTotal: valorTotal})}

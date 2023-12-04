@@ -19,7 +19,7 @@ export default function MultiSelectSection({ selections, childToParent }) {
   }, [selectedButtons])
 
   return (
-    <View className="flex-row flex-wrap justify-between">
+    <View className="flex-row flex-wrap justify-start">
       {
         selections.map((s, i) => {
           return(

@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView, TextInput, Alert } from 'react-native'
 import React, { useEffect } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useState } from 'react'
@@ -12,22 +12,31 @@ import ItemPedido from '../../model/classes/item_pedido'
 export default function Item({ route, navigation }) {
   const insets = useSafeAreaInsets()
 
-  const { nome, descricao, foto, variantes, adicionais } = route.params
+  const { fornecedorLoja, nome, descricao, foto, variantes, adicionais } = route.params
 
   const [quantidade, setQuantidade] = useState(1)
   const [selecionadosVariantes, setSelecionadosVariantes] = useState([])
   const [selecionadosAdicionais, setSelecionadosAdicionais] = useState([])
   const [valorTotal, setValorTotal] = useState(0.00)
 
+  const [alertOption, setAlertOption] = useState(false)
+
   const handleAddPedido = () => {
-    Pedido.add_item(new ItemPedido(
-      nomeProduto = nome,
-      selecionadosVariantes[0],
-      selecionadosAdicionais,
-      quantidade,
-      valorTotal,
-      'Teste de pedido longa descrição testando espaçamento no carrinho'
-    ))
+    if (selecionadosVariantes.length > 0) {
+      Pedido.add_item(new ItemPedido(
+        nomeProduto = nome,
+        selecionadosVariantes[0],
+        selecionadosAdicionais,
+        quantidade,
+        valorTotal,
+        'Teste de pedido longa descrição testando espaçamento no carrinho'
+      ))
+        
+      navigation.navigate('carrinho')
+    } else {
+      Alert.alert('Pedido inválido', 'Selecione uma opção do produto para realizar o seu pedido')
+      setAlertOption(true)
+    }
   }
 
   const handleQuantidadeItem = (operacao) => {
@@ -62,11 +71,8 @@ export default function Item({ route, navigation }) {
       paddingBottom: insets.bottom,
       paddingLeft: insets.left,
       paddingRight: insets.right,
-      backgroundColor: "#DFDFDF"
+      backgroundColor: "white"
     }}>
-
-      {/* Background */}
-      <View className="absolute bottom-0 bg-white w-full h-5/6 rounded-t-3xl"/>
 
       {/* Main */}
       <View className="flex-1">
@@ -74,33 +80,38 @@ export default function Item({ route, navigation }) {
           {/* Back Arrow */}
           <TouchableOpacity
           onPress={() => navigation.goBack()}
-          className="ml-5 mt-8"
+          className="ml-5 mt-8 w-10"
           >
             <BackArrow/>
           </TouchableOpacity>
 
           {/* Container */}
-          <View className="flex-1 p-5 mt-20 justify-between">
-
-            {/* Informação do item */}
-            <View className="flex-row">
-              <Image className="flex-2 h-24 w-24 rounded-lg"
-              source={foto}
-              />
-              <View className="flex-1 ml-3">
-                <Text className="text-lg font-semibold mb-1">{nome}</Text>
-                <Text className="text-base text-neutral-500">{descricao}</Text>
-              </View>
-            </View>
+          <View className="flex-1 p-5 mt-5 justify-between">
 
             {/* Variantes e adicionais */}
-            <ScrollView className="my-3"
+            <ScrollView className=""
             contentContainerStyle={{
               gap: 10,
             }}
             >
+              {/* Informação do item */}
+              <View className="flex-row">
+                <Image className="flex-2 h-24 w-24 rounded-lg"
+                source={foto}
+                />
+                <View className="flex-1 ml-3">
+                  <Text className="text-lg font-semibold mb-1">{nome}</Text>
+                  <Text className="text-base text-neutral-500">{descricao}</Text>
+                </View>
+              </View>
+
               <View>
-                <Text className="text-lg font-semibold text-neutral-400 mb-2">Opções</Text>
+                {
+                  alertOption?
+                    <Text className="text-lg font-bold text-orange-500 mb-2 border-l-2 pl-2 border-orange-500">Selecione uma opção abaixo!</Text>
+                  :
+                    <Text className="text-lg font-semibold text-neutral-400 mb-2">Opções</Text>
+                }
                 {
                   variantes.length > 0?
                   <SingleSelectSection selections={variantes} childToParent={handleChildToParent}/>:
@@ -122,7 +133,7 @@ export default function Item({ route, navigation }) {
                   textAlignVertical: 'top',
                   
                 }}
-                placeholder='Exemplo: Sem cebola e com azeitona na metade da pizza.'
+                placeholder='Adicione uma observação ao seu pedido.'
                 placeholderTextColor="#939596"
                 multiline={true}
                 className="bg-neutral-200 h-40 rounded-lg align-text-top p-3 text-neutral-800 text-lg"
@@ -134,16 +145,16 @@ export default function Item({ route, navigation }) {
           </View>
 
           {/* Finalizar Compra */}
-          <View className="flex-row h-28 justify-between p-3 border-t-2 border-neutral-400">
+          <View className="flex-row h-28 justify-between p-2 border-t-2 border-neutral-400">
             
             {/* Botao de quantidade */}
-            <View className="flex-row flex-1 items-center">
+            <View className="flex-row items-center w-52">
               <TouchableOpacity onPress={() => handleQuantidadeItem('subtrair')}
               className="py-2 rounded-lg px-5 border-2 border-neutral-400"
               >
                 <Text className="text-3xl font-semibold text-neutral-400">-</Text>
               </TouchableOpacity>
-              <View className="py-2 px-5 mx-1 bg-neutral-200 rounded-lg">
+              <View className="py-2 px-5 mx-1 bg-neutral-200 rounded-lg w-20 items-center">
                 <Text className="text-3xl font-semibold text-neutral-800">{quantidade}</Text>
               </View>
               <TouchableOpacity onPress={() => handleQuantidadeItem('somar')}
@@ -154,10 +165,9 @@ export default function Item({ route, navigation }) {
             </View>
 
             {/* Botão de finalizar a compra */}
-            <TouchableOpacity className="flex-2 justify-center bg-green-500 rounded-lg p-3 px-5"
+            <TouchableOpacity className="justify-center bg-green-500 rounded-lg p-3 w-44 items-center"
             onPress={() => {
               handleAddPedido()
-              navigation.navigate('carrinho')
             }}
             >
               <Text className="text-lg font-semibold text-neutral-100">Adicionar R${valorTotal.toFixed(2)}</Text>

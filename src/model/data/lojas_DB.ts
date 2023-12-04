@@ -13,6 +13,7 @@ export default class Lojas {
   }
 
   static return_loja(nome_loja: string) {
+    console.log(`Retornando loja: ${nome_loja}`)
     return Lojas._lojas.filter(l => l._nome === nome_loja)[0]
   }
 

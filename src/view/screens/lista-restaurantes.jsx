@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import PerfilLoja from '../components/perfil-loja'
 
@@ -24,7 +24,7 @@ export default function Restaurantes({ navigation }) {
     }}>
 
       <View className="flex-1 p-5">
-
+        
         {/* HEADER */}
         <View className="flex-row justify-between">
           <Menu/>
@@ -34,13 +34,13 @@ export default function Restaurantes({ navigation }) {
         </View>
 
         {/* Slogan */}
-        <View className="mt-12">
+        <View className="mt-8">
           <Slogan/>
-          <Text className="text-xl ml-1 mt-1 text-neutral-500">Faça seu pedido aqui!</Text>
+          <Text className="text-lg ml-1 mt-1 text-neutral-500">Faça seu pedido aqui!</Text>
         </View>
 
         {/* Lista de Lojas */}
-        <View className="flex-1 justify-center items-center">
+        <ScrollView className="flex-1 mt-5">
 
           {
             Lista_Lojas.map((l, i) => {
@@ -51,16 +51,28 @@ export default function Restaurantes({ navigation }) {
                 imagem={l._foto_path}
                 descricao={l._descricao}
                 aberto={true}
-                event={() => {navigation.navigate('cardapio', {
-                  cardapio: l._cardapio,
-                  nomeLoja: l._nome
-                })}}
+                event={() => { console.log(`Navegando para a loja ${l._nome}`)
+                  if (l._filtros.length >= 1) {
+                    navigation.navigate('filtros', {
+                      cardapio: l._cardapio,
+                      nomeLoja: l._nome,
+                      filtrosLoja: l._filtros
+                    })
+                  } else {
+                    navigation.navigate('cardapio', {
+                      cardapio: l._cardapio,
+                      nomeLoja: l._nome,
+                      filtrosLoja: l._filtros
+                    })
+                  }
+                  
+                }}
                 />
               )
             })
           }
 
-        </View>
+        </ScrollView>
 
       </View>
 
