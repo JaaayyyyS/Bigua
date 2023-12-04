@@ -12,7 +12,7 @@ import ItemPedido from '../../model/classes/item_pedido'
 export default function Item({ route, navigation }) {
   const insets = useSafeAreaInsets()
 
-  const { fornecedorLoja, nome, descricao, foto, variantes, adicionais } = route.params
+  const { nome, descricao, foto, variantes, adicionais, fornecedorLoja } = route.params
 
   const [quantidade, setQuantidade] = useState(1)
   const [selecionadosVariantes, setSelecionadosVariantes] = useState([])
@@ -29,7 +29,8 @@ export default function Item({ route, navigation }) {
         selecionadosAdicionais,
         quantidade,
         valorTotal,
-        'Teste de pedido longa descrição testando espaçamento no carrinho'
+        'Teste de pedido longa descrição testando espaçamento no carrinho',
+        fornecedor = fornecedorLoja
       ))
         
       navigation.navigate('carrinho')
@@ -108,7 +109,7 @@ export default function Item({ route, navigation }) {
               <View>
                 {
                   alertOption?
-                    <Text className="text-lg font-bold text-orange-500 mb-2 border-l-2 pl-2 border-orange-500">Selecione uma opção abaixo!</Text>
+                    <Text className="text-lg font-bold text-orange-500 mb-2 border-l-2 p-1 pl-4 border-orange-500 bg-orange-100 w-8/12">Selecione uma opção abaixo!</Text>
                   :
                     <Text className="text-lg font-semibold text-neutral-400 mb-2">Opções</Text>
                 }

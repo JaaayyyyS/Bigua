@@ -68,7 +68,7 @@ export default function Filtros({ route, navigation }) {
               image_PATH={require('../../../assets/Images/pizza.jpg')}
               quantidade={calcularFiltroQuantidade(item)}
               event={() => {
-                navigation.navigate('cardapio', {cardapio: cardapio, nomeLoja: item.label, filtro: item})
+                navigation.navigate('cardapio', {cardapio: cardapio, nomeFornecedor: nomeLoja, nomeFiltro: item, filtro: item})
               }}
               />
             }

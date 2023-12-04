@@ -20,7 +20,7 @@ const filtros = [
 
 export default function Cardapio({ route, navigation }) {
   const insets = useSafeAreaInsets()
-  const { cardapio, nomeLoja, filtro } = route.params
+  const { cardapio, nomeFornecedor, nomeFiltro, filtro } = route.params
 
   if (filtro) {
     cardapioFiltrado = cardapio.filter(p => p._filtro === filtro)
@@ -50,7 +50,7 @@ export default function Cardapio({ route, navigation }) {
           >
             <BackArrow/>
           </TouchableOpacity>
-          <Text className="font-bold text-lg">{filtro? filtro : nomeLoja}</Text>
+          <Text className="font-bold text-lg">{filtro? nomeFiltro : nomeFornecedor}</Text>
           <TouchableOpacity onPress={() => navigation.navigate('carrinho')}>
             <Bag/>
           </TouchableOpacity>
@@ -72,7 +72,7 @@ export default function Cardapio({ route, navigation }) {
                   foto: p._foto_path,
                   variantes: p._variantes,
                   adicionais: p._adicionais,
-                  fornecedorLoja: nomeLoja
+                  fornecedorLoja: nomeFornecedor
                 })}
                 variantes={p._variantes}
                 />

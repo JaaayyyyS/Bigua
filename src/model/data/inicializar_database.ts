@@ -56,7 +56,7 @@ export default function inicializar_database() {
       new Produto(
         'Café',
         'Descrição informativa do produto',
-        require("../../../assets/Images/pizza.jpg"),
+        require("../../../assets/Images/cafe.jpg"),
         [
           {nome: "Café", valor: 8.00},
         ],
@@ -70,11 +70,5 @@ export default function inicializar_database() {
     'Convés', 
     'Descrição longa do estabelecimento',
     require('../../../assets/Images/prato.jpg')
-  ))
-
-  Lojas.add_loja(new Loja(
-    'Hamburgueria', 
-    'Descrição longa do estabelecimento',
-    require('../../../assets/Images/pizza.jpg')
   ))
 }
